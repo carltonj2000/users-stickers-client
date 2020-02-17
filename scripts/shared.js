@@ -29,3 +29,23 @@ function showErrorMessage(e) {
   $errorMessage.text(e.responseJSON.message);
   $errorMessage.show();
 }
+
+function redirectIfLoggedIn() {
+  if (localStorage.user_id) {
+    console.log(localStorage.user_id);
+    window.location = `/user.html?id=${localStorage.user_id}`;
+  }
+}
+
+function setIdRedirect(result) {
+  if (!result.id) return;
+  localStorage.user_id = result.id;
+  $errorMessage.hide();
+  window.location = `/user.html?id=${result.id}`;
+}
+
+function logout() {
+  localStorage.removeItem("user_id");
+  $.get(`${AUTH_URL}/logout`).then(result => console.log(result));
+  window.location = `/login.html`;
+}
