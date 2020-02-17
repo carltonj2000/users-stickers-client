@@ -2,7 +2,7 @@ $(() => {
   $("form").submit(event => {
     event.preventDefault();
     const user = getUserFromForm();
-    login(user)
+    signup(user)
       .then(result => {
         console.log(result);
         $errorMessage.hide();
@@ -12,6 +12,6 @@ $(() => {
   });
 });
 
-function login(user) {
-  return $.post(`${AUTH_URL}/login`, user);
+function signup(user) {
+  return $.post(`${AUTH_URL}/signup`, user);
 }
